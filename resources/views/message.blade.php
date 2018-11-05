@@ -2,32 +2,31 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Demo CHat</title>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<title>Demo Chat</title>
 </head>
 <body>
-	<div style="height: 100px; overflow: auto;">
+	<div style="height: 300px; overflow: auto;" id="messages" class="messages">
 		@if (isset($messages))
 			@foreach ($messages as $message)
-				<p><strong>{{ $message->author }}</strong>: {{ $message->content }}</p>
+				<p id="{{ $message->id }}"><strong>{{ $message->author }}</strong>: {{ $message->content }}</p>
 			@endforeach
 		@endif
 	</div>
 	<hr>
 	<div>
-		<form action="" method="post">
-			{{ csrf_field() }}
-			Name: <input type="text" name="author"><br><br>
-			Content: <textarea name="content" id="" cols="30" rows="2"></textarea><br>
-			<button type="submit">Send</button>
-		</form>
+		{{-- <form action="" method="post"> --}}
+			{{-- {{ csrf_field() }} --}}
+			Name: <input type="text" name="author" id="author"><br><br>
+			Content: <input type="text" name="content" id="content"><br>
+			<button id="submit">Send</button>
+		{{-- </form> --}}
 	</div>
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/socket.io.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/socket.js') }}"></script>
 	<script>
-		var socket = io('http://localhost:6001')
-		socket.on('chat:message', function (data) {
-			console.log(data)
-		})
+		
 	</script>
 </body>
 </html>

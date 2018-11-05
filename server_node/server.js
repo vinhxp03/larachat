@@ -1,5 +1,5 @@
 var io = require('socket.io')(6001)
-console.log('Condsf adsfsd !')
+console.log('Connected to 6001!')
 
 io.on('error', function (socket) {
 	console.log('error')
@@ -21,5 +21,4 @@ redis.on('pmessage', function (partner, channel, message) {
 	console.log(partner)*/
 	message = JSON.parse(message)
 	io.emit(channel + ":" + message.event, message.data.message)
-	console.log('Send')
 })

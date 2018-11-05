@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class messages extends Model
+class Messages extends Model
 {
-    protected $talbe = 'messages';
+    protected $table = 'messages';
 
     protected $fillable = ['author', 'content'];
 }

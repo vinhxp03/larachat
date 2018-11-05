@@ -10,18 +10,18 @@ class RedisController extends Controller
 {
     public function index()
     {
-    	$messages = Messages::all()->sortByDesc("created_at");;
+    	// Messages::truncate(); die();
+    	$messages = Messages::all();//->sortByDesc('created_at');
     	return view('message', compact('messages'));
     }
 
     public function sendMessage(Request $req)
     {
-    	$message = Messages::create($req->all());
+    	$messages = Messages::create($req->all());
 
     	event(
-    		$e = new RedisEvent($message)
+    		$e = new RedisEvent($messages)
     	);
-
     	return redirect()->back();
     }
 }

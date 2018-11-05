@@ -9,9 +9,8 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use App\Messages;
 
-class RedisEvent implements ShouldBroadcast
+class PusherEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,11 +19,9 @@ class RedisEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public $message;
-
-    public function __construct(Messages $message)
+    public function __construct()
     {
-        $this->message = $message;
+        //
     }
 
     /**
@@ -34,12 +31,6 @@ class RedisEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        // return new PrivateChannel('channel-name');
-        return ['chat'];
-    }
-
-    public function broadcastAs()
-    {
-        return 'message';
+        return new Channel('chat');
     }
 }
